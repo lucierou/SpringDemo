@@ -14,7 +14,7 @@ import java.util.Date;
 public class Produit {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String marque;

@@ -35,7 +35,7 @@ public class ProduitService implements IDAO<Produit> {
     @Override
     public boolean update(Produit o) {
         session.beginTransaction();
-        session.persist(o);
+        session.saveOrUpdate(o);
         session.getTransaction().commit();
         return true;
     }
@@ -58,10 +58,15 @@ public class ProduitService implements IDAO<Produit> {
 
     @Override
     public List<Produit> findAll() {
-        return Arrays.asList(
-                new Produit(1, "Asus", "asusRef", new Date(), 25.50, 1),
-                new Produit(2, "HP", "hpRef", new Date(), 50.25, 2)
-        );
+        session.beginTransaction();
+        List<Produit> produits = session.createNativeQuery("SELECT * FROM produit;").getResultList();
+        session.getTransaction().commit();
+        return produits;
+
+//        return Arrays.asList(
+//                new Produit(1, "Asus", "asusRef", new Date(), 25.50, 1),
+//                new Produit(2, "HP", "hpRef", new Date(), 50.25, 2)
+//        );
     }
 
 

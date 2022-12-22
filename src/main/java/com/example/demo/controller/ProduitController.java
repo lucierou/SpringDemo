@@ -45,6 +45,13 @@ public class ProduitController {
         return null;
     }
 
+    @PostMapping("/remove{id}")
+    public String postProduit(@PathVariable Integer id) {
+        Produit produit = produitService.findById(id);
+        produitService.delete(produit);
+        return "Le produit" + produit + "a été supprimé";
+    }
+
 //    @PostMapping("")
 //    public Produit postProduit(
 //            @RequestParam int id,
